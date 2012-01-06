@@ -1,5 +1,7 @@
+package org.gildedrose;
 import java.util.ArrayList;
 import java.util.List;
+
 
 
 public class GildedRose {
@@ -21,12 +23,12 @@ public class GildedRose {
         items.add(new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20));
         items.add(new Item("Conjured Mana Cake", 3, 6));
 
-        updateQuality();
+        updateQuality(items);
 }
 
 
 	
-    public static void updateQuality()
+    public static void updateQuality(List<Item> items)
     {
         for (int i = 0; i < items.size(); i++)
         {

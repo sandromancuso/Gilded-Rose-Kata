@@ -1,3 +1,4 @@
+package org.gildedrose;
 
 public class Item {
     public String name;
