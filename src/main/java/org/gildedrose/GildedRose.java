@@ -27,43 +27,53 @@ public class GildedRose {
 
 	public static void updateQuality(List<Item> items) {
 		for (Item item : items) {
-			
-			if (!"Sulfuras, Hand of Ragnaros".equals(item.getName())) {
-				item.setSellIn(item.getSellIn() - 1);
-			}
-			
-			if (qualityCanBeIncreasedFor(item)) {
-				increaseQuality(item);
-			}
-			
-			if (qualityCanBeDecreasedFor(item)) {
-				item.setQuality(item.getQuality() - 1);
-				if (item.getSellIn() < 0) {
-					item.setQuality(item.getQuality() - 1);
-				}
-			} 
+			udpateSellInFor(item);
+			updateQualityFor(item);
+		}
+	}
+	
+	private static void udpateSellInFor(Item item) {
+		item.setSellIn(item.getSellIn() - sellInDecreaseFor(item));
+	}
 
-			if (item.getSellIn() < 0 && !qualityCanBeDecreasedFor(item)) {
-				item.setQuality(0);
-			}
-				
+	private static int sellInDecreaseFor(Item item) {
+		return "Sulfuras, Hand of Ragnaros".equals(item.getName()) ? 0 : 1; 
+	}
+	
+	private static void updateQualityFor(Item item) {
+		if (qualityCanBeIncreasedFor(item)) {
+			item.setQuality(item.getQuality() + qualityHikeFor(item));
+		}
+		
+		if (qualityCanBeDecreasedFor(item)) {
+			item.setQuality(item.getQuality() - qualityDropFor(item));
+		} 
+
+		if (item.getSellIn() < 0 && !qualityCanBeDecreasedFor(item)) {
+			item.setQuality(0);
 		}
 	}
 
-	protected static void increaseQuality(Item item) {
-		item.setQuality(item.getQuality() + 1);
+	private static int qualityDropFor(Item item) {
+		return item.getSellIn() < 0 ? 2 : 1;
+	}
+	
+	private static int qualityHikeFor(Item item) {
+		int qualityHike = 1;
 
 		if ("Backstage passes to a TAFKAL80ETC concert".equals(item.getName())) {
 			if (item.getSellIn() < 11 && item.getQuality() < 50) {
-				item.setQuality(item.getQuality() + 1);
+				qualityHike++;
 			}
 
 			if (item.getSellIn() < 6 && item.getQuality() < 50) {
-				item.setQuality(item.getQuality() + 1);
+				qualityHike++;
 			}
 		}
-	}
 
+		return qualityHike;
+	}
+	
 	private static boolean qualityCanBeIncreasedFor(Item item) {
 		return !qualityDecreasesAsItGetsOlder(item) && item.getQuality() < 50;
 	}
