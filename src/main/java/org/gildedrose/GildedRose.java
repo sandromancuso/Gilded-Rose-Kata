@@ -6,7 +6,16 @@ import java.util.List;
 public class GildedRose {
 
 	private static List<Item> items = null;
+	private static QualityControl qualityControl;
+	
+	public GildedRose(QualityControl qualityControl) {
+		GildedRose.qualityControl = qualityControl;
+	}
 
+	public void updateQualityFor(List<Item> items) {
+		GildedRose.updateQuality(items);
+	}
+	
 	/**
 	 * @param args
 	 */
@@ -28,6 +37,7 @@ public class GildedRose {
 	public static void updateQuality(List<Item> items) {
 		for (Item item : items) {
 			udpateSellInFor(item);
+			qualityControl.updateQualityFor(item);
 			updateQualityFor(item);
 		}
 	}
