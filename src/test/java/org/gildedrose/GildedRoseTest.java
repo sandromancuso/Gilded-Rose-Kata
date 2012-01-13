@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -27,9 +26,9 @@ public class GildedRoseTest {
 		gildedRose = new GildedRose(new QualityControl());
 	}
 	
-	@Ignore
 	@Test public void
 	shouldUpdateItemsQuality() {
+		GildedRose gildedRose = new GildedRose(qualityControl);
 		Item item1 = anItem().build();
 		Item item2 = anItem().build();
 		
@@ -145,7 +144,6 @@ public class GildedRoseTest {
 		assertThat(backstage.getQuality(), is(0));
 	}
 	
-	@Ignore
 	@Test public void
 	shouldDecreaseQualityByTwoForAllConjuredItems() {
 		Item conjured = anItem()
