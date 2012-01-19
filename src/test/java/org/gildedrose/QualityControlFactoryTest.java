@@ -1,8 +1,9 @@
 package org.gildedrose;
 
 import static org.gildedrose.ItemBuilder.anItem;
+import static org.gildedrose.QualityControlFactory.AGED_BRIE_ITEM_NAME;
 import static org.gildedrose.QualityControlFactory.BACKSTAGE_PASS_ITEM_NAME;
-import static org.gildedrose.QualityControlFactory.SULFURAS_HAND_OF_RAGNAROS;
+import static org.gildedrose.QualityControlFactory.SULFURAS_ITEM_NAME;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -37,9 +38,17 @@ public class QualityControlFactoryTest {
 	@Test public void
 	shouldReturnSulfurasQualityControlWhenItemIsASulfuras() {
 		QualityControl qualityControl = factory.qualityControlFor(
-				anItem().withName(SULFURAS_HAND_OF_RAGNAROS).build());
+				anItem().withName(SULFURAS_ITEM_NAME).build());
 		
 		assertThat(qualityControl, is(instanceOf(SulfurasQualityControl.class)));
+	}
+	
+	@Test public void
+	shouldReturnAgedBrieQualityControlWhenItemIsAgedBrie() {
+		QualityControl qualityControl = factory.qualityControlFor(
+				anItem().withName(AGED_BRIE_ITEM_NAME).build());
+		
+		assertThat(qualityControl, is(instanceOf(AgedBrieQualityControl.class)));
 	}
 	
 }

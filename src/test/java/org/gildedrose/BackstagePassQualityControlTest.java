@@ -66,6 +66,15 @@ public class BackstagePassQualityControlTest {
 		assertThat(backstagePass.getQuality(), is(0));
 	}
 	
+	@Test public void
+	shouldNeverIncreaseQualityToMoreThanFifty() {
+		backstagePass.setSellIn(FIVE_DAYS);
+		backstagePass.setQuality(50);
+		
+		qualityControl.updateQualityFor(backstagePass);
+		
+		assertThat(backstagePass.getQuality(), is(50));
+	}
 	
 	
 }

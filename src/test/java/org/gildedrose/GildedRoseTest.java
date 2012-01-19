@@ -60,7 +60,6 @@ public class GildedRoseTest {
 		assertThat(dexterityVest.getQuality(), is(9));
 	}
 	
-	
 	@Test public void
 	shouldLowerTheQualityValueTwiceAsFastWhenSellByDateHasPassed() {
 		Item dexterityVest = anItem()
@@ -135,6 +134,18 @@ public class GildedRoseTest {
 		gildedRose.updateQualityFor(listContaining(backstage));
 		
 		assertThat(backstage.getQuality(), is(23));
+	}
+	
+	@Test public void
+	shouldIncreaseQualityOfBackstagePassToMaximulOfFifty() {
+		Item backstage = anItem()
+				.withName("Backstage passes to a TAFKAL80ETC concert")
+				.withQuality(49)
+				.withSellIn(5).build();
+		
+		gildedRose.updateQualityFor(listContaining(backstage));
+		
+		assertThat(backstage.getQuality(), is(50));
 	}
 	
 	@Test public void

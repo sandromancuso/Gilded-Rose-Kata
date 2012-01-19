@@ -2,11 +2,12 @@ package org.gildedrose;
 
 public class BackstagePassQualityControl implements QualityControl {
 
-	private static final int DEFAULT_QUALITY_HIKE = 1;
-
 	public void updateQualityFor(Item backstagePass) {
 		if (backstagePass.getSellIn() > 0) {
 			backstagePass.setQuality(backstagePass.getQuality() + qualityHikeFor(backstagePass));
+			if (backstagePass.getQuality() > MAX_QUALITY_ALLOWED) {
+				backstagePass.setQuality(MAX_QUALITY_ALLOWED);
+			}
 		} else {
 			backstagePass.setQuality(0);
 		}
