@@ -11,7 +11,7 @@ public class ItemBuilder {
 		return new ItemBuilder();
 	}
 
-	public ItemBuilder withQualily(int quality) {
+	public ItemBuilder withQuality(int quality) {
 		this.quality = quality;
 		return this;
 	}

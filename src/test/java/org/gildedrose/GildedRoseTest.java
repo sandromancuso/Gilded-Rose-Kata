@@ -3,6 +3,7 @@ import static org.gildedrose.ItemBuilder.anItem;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -18,17 +20,20 @@ public class GildedRoseTest {
 	
 	private static final int EXPIRED = -1;
 	
-	@Mock private QualityControl qualityControl;
+	@Mock private QualityControlFactory qualityControlFactory;
+	@Mock private DefaultQualityControl qualityControl;
 	private GildedRose gildedRose;
 	
 	@Before 
 	public void initialise() {
-		gildedRose = new GildedRose(new QualityControl());
+		when(qualityControlFactory.qualityControlFor(Mockito.any(Item.class))).thenReturn(qualityControl);
+//		gildedRose = new GildedRose(qualityControlFactory);
+		gildedRose = new GildedRose(new QualityControlFactory());
 	}
 	
 	@Test public void
 	shouldUpdateItemsQuality() {
-		GildedRose gildedRose = new GildedRose(qualityControl);
+		GildedRose gildedRose = new GildedRose(qualityControlFactory);
 		Item item1 = anItem().build();
 		Item item2 = anItem().build();
 		
@@ -48,7 +53,7 @@ public class GildedRoseTest {
 	
 	@Test public void
 	shouldLowerTheQualityValue() {
-		Item dexterityVest = anItem().withName("+5 Dexterity Vest").withQualily(10).build();
+		Item dexterityVest = anItem().withName("+5 Dexterity Vest").withQuality(10).build();
 		
 		gildedRose.updateQualityFor(listContaining(dexterityVest));
 		
@@ -60,7 +65,7 @@ public class GildedRoseTest {
 	shouldLowerTheQualityValueTwiceAsFastWhenSellByDateHasPassed() {
 		Item dexterityVest = anItem()
 								.withName("+5 Dexterity Vest")
-								.withQualily(10)
+								.withQuality(10)
 								.withSellIn(EXPIRED).build();
 		
 		gildedRose.updateQualityFor(listContaining(dexterityVest));
@@ -70,7 +75,7 @@ public class GildedRoseTest {
 	
 	@Test public void
 	shouldNeverLowerTheQualityToANegativeValue() {
-		Item dexterityVest = anItem().withName("+5 Dexterity Vest").withQualily(0).build();
+		Item dexterityVest = anItem().withName("+5 Dexterity Vest").withQuality(0).build();
 		
 		gildedRose.updateQualityFor(listContaining(dexterityVest));
 		
@@ -79,7 +84,7 @@ public class GildedRoseTest {
 	
 	@Test public void
 	shouldIncreaseAgedBrieWheverItGetsOlder() {
-		Item agedBrie = anItem().withName("Aged Brie").withQualily(10).build();
+		Item agedBrie = anItem().withName("Aged Brie").withQuality(10).build();
 		
 		gildedRose.updateQualityFor(listContaining(agedBrie));
 		
@@ -88,7 +93,7 @@ public class GildedRoseTest {
 	
 	@Test public void
 	shouldNeverIncreaseTheQualityOfAItemToMoreThanFifty() {
-		Item agedBrie = anItem().withName("Aged Brie").withQualily(50).build();
+		Item agedBrie = anItem().withName("Aged Brie").withQuality(50).build();
 		
 		gildedRose.updateQualityFor(listContaining(agedBrie));
 		
@@ -99,7 +104,7 @@ public class GildedRoseTest {
 	shouldNeverChangeSellInAndQualityOfSulfuras() {
 		Item sulfuras = anItem()
 								.withName("Sulfuras, Hand of Ragnaros")
-								.withQualily(20)
+								.withQuality(20)
 								.withSellIn(10).build();
 		
 		gildedRose.updateQualityFor(listContaining(sulfuras));
@@ -112,7 +117,7 @@ public class GildedRoseTest {
 	shouldIncreaseQualityByTwoOfBackstageWhenNeedsToBeSoldInTenDays() {
 		Item backstage = anItem()
 								.withName("Backstage passes to a TAFKAL80ETC concert")
-								.withQualily(20)
+								.withQuality(20)
 								.withSellIn(10).build();
 		
 		gildedRose.updateQualityFor(listContaining(backstage));
@@ -124,7 +129,7 @@ public class GildedRoseTest {
 	shouldIncreaseQualityByThreeOfBackstageWhenNeedsToBeSoldInLessThanSixDays() {
 		Item backstage = anItem()
 							.withName("Backstage passes to a TAFKAL80ETC concert")
-							.withQualily(20)
+							.withQuality(20)
 							.withSellIn(5).build();
 		
 		gildedRose.updateQualityFor(listContaining(backstage));
@@ -136,7 +141,7 @@ public class GildedRoseTest {
 	shouldSetQualityToZeroForBackstageAfterConcert() {
 		Item backstage = anItem()
 				.withName("Backstage passes to a TAFKAL80ETC concert")
-				.withQualily(20)
+				.withQuality(20)
 				.withSellIn(0).build();
 		
 		gildedRose.updateQualityFor(listContaining(backstage));
@@ -148,7 +153,7 @@ public class GildedRoseTest {
 	shouldDecreaseQualityByTwoForAllConjuredItems() {
 		Item conjured = anItem()
 				.withName("Conjured Mana Cake")
-				.withQualily(20)
+				.withQuality(20)
 				.withSellIn(10).build();
 		
 		gildedRose.updateQualityFor(listContaining(conjured));
