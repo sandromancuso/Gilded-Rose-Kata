@@ -4,6 +4,108 @@
 	<groupId>GildedRoseJava</groupId>
 	<artifactId>GildedRoseJava</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+
+	<properties>
+		<selenium.version>2.17.0</selenium.version>
+		<ignore.failures>false</ignore.failures>
+		<meta.filter></meta.filter>
+		<threads>1</threads>
+		<skip>false</skip>
+		<stories>**/*Stories.java</stories>
+		<jbehave.core.version>3.5.4</jbehave.core.version>
+		<jbehave.web.version>3.5-SNAPSHOT</jbehave.web.version>
+		<jbehave.site.version>3.1.1</jbehave.site.version>
+	</properties>
+
+	<build>
+	
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.1</version>
+                    <configuration>
+                        <source>1.5</source>
+                        <target>1.5</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        	
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>${basedir}/src/main/stories</directory>
+                <filtering>false</filtering>
+            </resource>
+        </resources>        	
+        	
+		<plugins>
+			<plugin>
+				<groupId>org.jbehave</groupId>
+				<artifactId>jbehave-maven-plugin</artifactId>
+				<version>${jbehave.core.version}</version>
+				<executions>
+				<!-- 
+					<execution>
+						<id>unpack-view-resources</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>unpack-view-resources</goal>
+						</goals>
+					</execution>
+				 -->
+					<execution>
+						<id>run-stories-as-embeddables</id>
+						<phase>integration-test</phase>
+						<configuration>
+							<includes>
+								<include>**/*Stories.java</include>
+							</includes>
+							<excludes />
+							<generateViewAfterStories>true</generateViewAfterStories>
+							<generateViewAfterStories>true</generateViewAfterStories>
+							<ignoreFailureInStories>${ignore.failures}</ignoreFailureInStories>
+							<ignoreFailureInView>${ignore.failures}</ignoreFailureInView>
+							<threads>${threads}</threads>
+							<skip>${skip}</skip>
+							<metaFilters>
+								<metaFilter>${meta.filter}</metaFilter>
+							</metaFilters>
+							<systemProperties>
+								<property>
+									<name>java.awt.headless</name>
+									<value>true</value>
+								</property>
+							</systemProperties>
+						</configuration>
+						<goals>
+							<goal>run-stories-as-embeddables</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report-stepdocs</id>
+						<phase>integration-test</phase>
+						<configuration>
+							<includes>
+								<include>${stories}</include>
+							</includes>
+						</configuration>
+						<goals>
+							<goal>report-stepdocs-as-embeddables</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+	</build>
+
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -24,5 +126,24 @@
 			<version>1.1</version>
 			<scope>test</scope>
 		</dependency>
+        <dependency>
+            <groupId>org.jbehave</groupId>
+            <artifactId>jbehave-core</artifactId>
+            <version>${jbehave.core.version}</version>
+            <classifier>resources</classifier>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>org.jbehave.site</groupId>
+            <artifactId>jbehave-site-resources</artifactId>
+            <version>${jbehave.site.version}</version>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>org.jbehave</groupId>
+            <artifactId>jbehave-spring</artifactId>
+            <version>${jbehave.core.version}</version>
+        </dependency>
+
 	</dependencies>
 </project>
