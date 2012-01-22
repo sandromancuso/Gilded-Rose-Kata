@@ -1,4 +1,4 @@
-package org.gildedrose.steps;
+package org.gildedrose.jbehave.steps;
 
 import static java.util.Arrays.asList;
 import static org.gildedrose.builder.ItemBuilder.anItem;

@@ -1,4 +1,4 @@
-package org.gildedrose.stories;
+package org.gildedrose.jbehave;
 
 import static java.util.Arrays.asList;
 import static org.jbehave.core.io.CodeLocations.codeLocationFromClass;
@@ -7,7 +7,7 @@ import static org.jbehave.core.reporters.Format.TXT;
 
 import java.util.List;
 
-import org.gildedrose.steps.UpdateItemsQualitySteps;
+import org.gildedrose.jbehave.steps.UpdateItemsQualitySteps;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
 import org.jbehave.core.io.LoadFromClasspath;
