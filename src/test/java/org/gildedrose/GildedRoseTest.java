@@ -23,18 +23,20 @@ public class GildedRoseTest {
 	@Mock private DefaultQualityControl qualityControl;
 	@Mock private SellInControl sellInControl;
 	private GildedRose gildedRose;
+	private Item item2;
+	private Item item1;
 	
 	@Before 
 	public void initialise() {
 		when(qualityControlFactory.qualityControlFor(Mockito.any(Item.class))).thenReturn(qualityControl);
 		gildedRose = new GildedRose(qualityControlFactory, sellInControl);
+
+		item1 = anItem().build();
+		item2 = anItem().build();
 	}
 	
 	@Test public void
 	shouldUpdateItemsQuality() {
-		Item item1 = anItem().build();
-		Item item2 = anItem().build();
-		
 		gildedRose.updateQualityFor(listContaining(item1, item2));
 		
 		verifyIfQualityWasUpdatedFor(item1, item2);
@@ -42,9 +44,6 @@ public class GildedRoseTest {
 
 	@Test public void
 	shouldUpdateItemsSellIn() {
-		Item item1 = anItem().build();
-		Item item2 = anItem().build();
-		
 		gildedRose.updateQualityFor(listContaining(item1, item2));
 		
 		verifyIfSellInWasUpdatedFor(item1, item2);
