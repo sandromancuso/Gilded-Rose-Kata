@@ -1,10 +1,12 @@
-package org.gildedrose;
+package org.gildedrose.qualitycontrol;
 
-import static org.gildedrose.QualityControlFactory.BACKSTAGE_PASS_ITEM_NAME;
 import static org.gildedrose.builder.ItemBuilder.anItem;
+import static org.gildedrose.qualitycontrol.QualityControlFactory.BACKSTAGE_PASS_ITEM_NAME;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+import org.gildedrose.Item;
+import org.gildedrose.qualitycontrol.BackstagePassQualityControl;
 import org.junit.Before;
 import org.junit.Test;
 

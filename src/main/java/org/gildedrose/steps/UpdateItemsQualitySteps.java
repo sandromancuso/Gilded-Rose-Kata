@@ -7,7 +7,8 @@ import static org.junit.Assert.assertThat;
 
 import org.gildedrose.GildedRose;
 import org.gildedrose.Item;
-import org.gildedrose.QualityControlFactory;
+import org.gildedrose.qualitycontrol.QualityControlFactory;
+import org.gildedrose.sellincontrol.SellInControl;
 import org.jbehave.core.annotations.BeforeStory;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Named;
@@ -21,7 +22,7 @@ public class UpdateItemsQualitySteps {
 	
 	@BeforeStory
 	public void beforeStoryDo() {
-		gildedRose = new GildedRose(new QualityControlFactory()); 
+		gildedRose = new GildedRose(new QualityControlFactory(), new SellInControl()); 
 	}
 	
 	@Given("an item named <name>, with sell in <sellIn> days and quality <quality>")

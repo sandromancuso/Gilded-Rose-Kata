@@ -2,12 +2,18 @@ package org.gildedrose;
 
 import java.util.List;
 
+import org.gildedrose.qualitycontrol.QualityControl;
+import org.gildedrose.qualitycontrol.QualityControlFactory;
+import org.gildedrose.sellincontrol.SellInControl;
+
 public class GildedRose {
 
 	private QualityControlFactory qualityControlFactory;
+	private SellInControl sellInControl;
 	
-	public GildedRose(QualityControlFactory qualityControl) {
+	public GildedRose(QualityControlFactory qualityControl, SellInControl sellInControl) {
 		this.qualityControlFactory = qualityControl;
+		this.sellInControl = sellInControl;
 	}
 
 	public void updateQualityFor(List<Item> items) {
@@ -23,11 +29,7 @@ public class GildedRose {
 	}
 
 	private void udpateSellInFor(Item item) {
-		item.setSellIn(item.getSellIn() - sellInDecreaseFor(item));
+		sellInControl.updateSellInFor(item);
 	}
 
-	private int sellInDecreaseFor(Item item) {
-		return "Sulfuras, Hand of Ragnaros".equals(item.getName()) ? 0 : 1; 
-	}
-	
 }

@@ -1,4 +1,6 @@
-package org.gildedrose;
+package org.gildedrose.qualitycontrol;
+
+import org.gildedrose.Item;
 
 public class SulfurasQualityControl implements QualityControl {
 

@@ -1,10 +1,12 @@
-package org.gildedrose;
+package org.gildedrose.qualitycontrol;
 
-import static org.gildedrose.QualityControlFactory.AGED_BRIE_ITEM_NAME;
 import static org.gildedrose.builder.ItemBuilder.anItem;
+import static org.gildedrose.qualitycontrol.QualityControlFactory.AGED_BRIE_ITEM_NAME;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+import org.gildedrose.Item;
+import org.gildedrose.qualitycontrol.AgedBrieQualityControl;
 import org.junit.Test;
 
 public class AgedBrieQualityControlTest {

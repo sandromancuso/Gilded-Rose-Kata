@@ -1,9 +1,11 @@
-package org.gildedrose;
+package org.gildedrose.qualitycontrol;
 
 import static org.gildedrose.builder.ItemBuilder.anItem;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+import org.gildedrose.Item;
+import org.gildedrose.qualitycontrol.SulfurasQualityControl;
 import org.junit.Test;
 
 public class SulfurasQualityControlTest {
