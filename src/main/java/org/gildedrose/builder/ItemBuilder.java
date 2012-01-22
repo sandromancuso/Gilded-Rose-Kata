@@ -1,4 +1,6 @@
-package org.gildedrose;
+package org.gildedrose.builder;
+
+import org.gildedrose.Item;
 
 
 public class ItemBuilder {

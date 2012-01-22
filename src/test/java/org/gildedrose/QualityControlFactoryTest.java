@@ -1,9 +1,9 @@
 package org.gildedrose;
 
-import static org.gildedrose.ItemBuilder.anItem;
 import static org.gildedrose.QualityControlFactory.AGED_BRIE_ITEM_NAME;
 import static org.gildedrose.QualityControlFactory.BACKSTAGE_PASS_ITEM_NAME;
 import static org.gildedrose.QualityControlFactory.SULFURAS_ITEM_NAME;
+import static org.gildedrose.builder.ItemBuilder.anItem;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;

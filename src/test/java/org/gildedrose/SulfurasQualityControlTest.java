@@ -1,6 +1,6 @@
 package org.gildedrose;
 
-import static org.gildedrose.ItemBuilder.anItem;
+import static org.gildedrose.builder.ItemBuilder.anItem;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 

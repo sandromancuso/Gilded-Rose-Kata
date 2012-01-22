@@ -5,7 +5,7 @@ import static org.jbehave.core.io.CodeLocations.codeLocationFromClass;
 
 import java.util.List;
 
-import org.gildedrose.steps.GridSteps;
+import org.gildedrose.steps.UpdateItemsQualitySteps;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
 import org.jbehave.core.io.LoadFromClasspath;
@@ -42,7 +42,8 @@ public class GildedRoseStories extends JUnitStories {
 
 	@Override
 	public List<CandidateSteps> candidateSteps() {
-      return new InstanceStepsFactory(configuration(), new GridSteps()).createCandidateSteps();
+      return new InstanceStepsFactory(configuration(), 
+    		  new UpdateItemsQualitySteps()).createCandidateSteps();
 	}
 	
 }
