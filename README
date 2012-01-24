@@ -1,5 +1,6 @@
 Original source in C#: https://github.com/NotMyself/GildedRose
 Java version copied from: https://github.com/wouterla/GildedRose
+Ruby version: https://github.com/professor/GildedRose
 
 My solution starts with a JBehave test and you can follow the code from there. Here's the .story and steps: 
 https://github.com/sandromancuso/Gilded-Rose-Kata/blob/master/src/main/stories/update_items_quality.story
