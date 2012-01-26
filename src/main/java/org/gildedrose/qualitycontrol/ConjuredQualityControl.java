@@ -11,11 +11,9 @@ public class ConjuredQualityControl implements QualityControl {
 	}
 
 	private int qualityDropFor(Item item) {
-		int qualityDrop = item.getQuality() - CONJURED_QUALITY_DROP;
-		return qualityDrop > 0
+		return item.getQuality() - CONJURED_QUALITY_DROP > 0
 					? CONJURED_QUALITY_DROP
 				    : item.getQuality();
-						
 						
 	}
 

@@ -1,5 +1,7 @@
 package org.gildedrose.qualitycontrol;
 
+import static java.lang.Math.min;
+
 import org.gildedrose.Item;
 
 public class BackstagePassQualityControl implements QualityControl {
@@ -12,14 +14,13 @@ public class BackstagePassQualityControl implements QualityControl {
 	private static final int EXTRA_QUALITY_HIKE = 1;
 
 	public void updateQualityFor(Item backstagePass) {
-		if (backstagePass.getSellIn() > 0) {
-			backstagePass.setQuality(backstagePass.getQuality() + qualityHikeFor(backstagePass));
-			if (backstagePass.getQuality() > MAX_QUALITY_ALLOWED) {
-				backstagePass.setQuality(MAX_QUALITY_ALLOWED);
-			}
-		} else {
-			backstagePass.setQuality(0);
-		}
+		backstagePass.setQuality(newQualityFor(backstagePass));
+	}
+
+	private int newQualityFor(Item backstagePass) {
+		return backstagePass.getSellIn() > 0
+				? min(backstagePass.getQuality() + qualityHikeFor(backstagePass), MAX_QUALITY_ALLOWED)
+			    : 0;
 	}
 	
 	private int qualityHikeFor(Item backstagePass) {
