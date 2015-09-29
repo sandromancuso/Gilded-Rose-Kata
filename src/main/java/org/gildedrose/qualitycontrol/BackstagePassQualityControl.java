@@ -6,7 +6,7 @@ import org.gildedrose.Item;
 
 public class BackstagePassQualityControl implements QualityControl {
 
-	private static final int ELEVE_DAYS = 11;
+	private static final int ELEVEN_DAYS = 11;
 	private static final int FIVE_DAYS = 5;
 	
 	private static final int NO_EXTRA_QUALITY_HIKE = 0;
@@ -41,7 +41,7 @@ public class BackstagePassQualityControl implements QualityControl {
 	}
 
 	private boolean concertIsWithinSixAndTenDays(Item backstagePass) {
-		return backstagePass.getSellIn() > FIVE_DAYS && backstagePass.getSellIn() < ELEVE_DAYS;
+		return backstagePass.getSellIn() > FIVE_DAYS && backstagePass.getSellIn() < ELEVEN_DAYS;
 	}
 
 
